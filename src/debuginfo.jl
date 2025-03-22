@@ -2,8 +2,12 @@
 Print some useful information about the current RCall.jl setup.
 If `all` is false, only RCall.jl information is printed, otherwise
 information about your Julia and R setup is printed as well.
+This function is intended to be used in the Julia REPL only.
 """
-function versioninfo(; all=true)
+function debuginfo(; all=true)
+    if all && !isdefined(Main, :versioninfo)
+        error("This function is intended to be used in the Julia REPL only.")
+    end
     if all
         println("RCall.jl information:")
     end
